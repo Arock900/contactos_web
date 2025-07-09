@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Contactos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+
+</head>
+<body>
+    <h1>📇 Lista de Contactos</h1>
+
+ <div style="margin-bottom: 20px;">
+    <a href="/agregar">➕ Agregar nuevo</a>
+    <a href="/buscar" style="margin-left: 20px;">🔍 Buscar</a>
+</div>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in contactos %}
+            <tr>
+                <td>{{ contacto[1] }}</td>
+                <td>{{ contacto[2] }}</td>
+                <td>{{ contacto[3] }}</td>
+                <td>
+                    <a href="/editar/{{ contacto[0] }}">✏️ Editar</a> |
+                    <a href="/eliminar/{{ contacto[0] }}" onclick="return confirm('¿Eliminar este contacto?')">🗑️ Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

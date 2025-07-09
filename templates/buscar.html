@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Contacto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h1>🔍 Buscar Contacto</h1>
+
+    <form method="POST">
+        <input type="text" name="termino" placeholder="Nombre a buscar" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if resultados is defined %}
+        {% if resultados %}
+            <h2>Resultados:</h2>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for contacto in resultados %}
+                <tr>
+                    <td>{{ contacto[1] }}</td>
+                    <td>{{ contacto[2] }}</td>
+                    <td>{{ contacto[3] }}</td>
+                    <td>
+                        <a href="/editar/{{ contacto[0] }}">✏️ Editar</a> |
+                        <a href="/eliminar/{{ contacto[0] }}" onclick="return confirm('¿Eliminar este contacto?')">🗑️ Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No se encontraron resultados.</p>
+        {% endif %}
+    {% endif %}
+
+    <br>
+    <a href="/">🔙 Volver al inicio</a>
+</body>
+</html>
