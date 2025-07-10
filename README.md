@@ -69,6 +69,4 @@ contactos_web/
 Andrés Rojas
 GitHub
 
-yaml
-Copiar código
 
