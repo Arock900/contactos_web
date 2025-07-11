@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,flash,url_for
+
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = 'mi_clave_secreta'
 
 def obtener_conexion():
     return sqlite3.connect('database.db')
@@ -50,7 +52,7 @@ def agregar():
         conexion.commit()
         conexion.close()
 
-        return redirect('/')
+        flash('Contacto agregado exitosamente', 'success')
     return render_template('agregar.html')
 
 @app.route('/buscar', methods=["GET","POST"])
@@ -81,7 +83,10 @@ def editar(id):
         )
         conexion.commit()
         conexion.close()
-        return redirect('/')
+        flash("Contacto actualizado correctamente", "success")
+        return redirect(url_for('inicio'))
+
+        
     
     cursor.execute('SELECT * FROM contactos WHERE id = ?', (id,))
     contacto = cursor.fetchone()
@@ -97,7 +102,12 @@ def eliminar(id):
     cursor.execute('DELETE FROM contactos WHERE id = ?', (id,))
     conexion.commit()
     conexion.close()
-    return redirect('/')
+    flash("Contacto eliminado correctamente", "success")
+    return redirect(url_for('inicio'))
+    
+
+    
+
 
 if __name__ == '__main__':
     

@@ -93,3 +93,14 @@ p {
     font-style: italic;
     color: #666;
 }
+.flash-message.success {
+    background-color: #dcedc8;
+    color: #33691e;
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border: 1px solid #c5e1a5;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
