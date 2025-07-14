@@ -1,28 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Contactos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
-
 </head>
 <body>
     <h1>📇 Lista de Contactos</h1>
+
     {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, msg in messages %}
-      <div class="flash-message {{ category }}">{{ msg }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="flash-message {{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
-
-
- <div style="margin-bottom: 20px;">
-    <a href="/agregar">➕ Agregar nuevo</a>
-    <a href="/buscar" style="margin-left: 20px;">🔍 Buscar</a>
-</div>
+    <div style="margin-bottom: 20px;">
+        <a href="/agregar">➕ Agregar nuevo</a>
+        <a href="/buscar" style="margin-left: 20px;">🔍 Buscar</a>
+    </div>
 
     <table border="1" cellpadding="10">
         <thead>
@@ -36,12 +33,12 @@
         <tbody>
             {% for contacto in contactos %}
             <tr>
-                <td>{{ contacto[1] }}</td>
-                <td>{{ contacto[2] }}</td>
-                <td>{{ contacto[3] }}</td>
+                <td>{{ contacto.nombre }}</td>
+                <td>{{ contacto.telefono }}</td>
+                <td>{{ contacto.email }}</td>
                 <td>
-                    <a href="/editar/{{ contacto[0] }}">✏️ Editar</a> |
-                    <a href="/eliminar/{{ contacto[0] }}" onclick="return confirm('¿Eliminar este contacto?')">🗑️ Eliminar</a>
+                    <a href="/editar/{{ contacto.id }}">✏️ Editar</a> |
+                    <a href="/eliminar/{{ contacto.id }}" onclick="return confirm('¿Eliminar este contacto?')">🗑️ Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
