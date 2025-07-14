@@ -1,9 +1,11 @@
+import os
 from flask import Flask, render_template, request, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://contactos_db_haiu_user:1sKvnRSG3Jb0v7Of2oWHOY4A5fKPzkwh@dpg-d1qn95je5dus73f56dkg-a.oregon-postgres.render.com/contactos_db_haiu"
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.secret_key = 'mi_clave_secreta'
 
 db = SQLAlchemy(app)
