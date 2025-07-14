@@ -9,6 +9,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.secret_key = 'mi_clave_secreta'
 
 db = SQLAlchemy(app)
+with app.app_context():
+    db.create_all()
+
 
 # Modelo Contacto
 class Contacto(db.Model):
