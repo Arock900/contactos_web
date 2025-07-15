@@ -2,47 +2,75 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Contactos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
-<body>
-    <h1>📇 Lista de Contactos</h1>
+<body class="bg-light">
+    <header class="bg-primary text-white text-center py-3 mb-4">
+    <h2>📇 Contactos Web</h2>
+    <nav>
+        <a href="/" class="text-white me-3">Inicio</a>
+        <a href="/agregar" class="text-white me-3">Agregar</a>
+        <a href="/buscar" class="text-white">Buscar</a>
+    </nav>
+</header>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, msg in messages %}
-          <div class="flash-message {{ category }}">{{ msg }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
 
-    <div style="margin-bottom: 20px;">
-        <a href="/agregar">➕ Agregar nuevo</a>
-        <a href="/buscar" style="margin-left: 20px;">🔍 Buscar</a>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">📇 Lista de Contactos</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, msg in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <div class="mb-3 text-end">
+            <a href="/agregar" class="btn btn-primary">➕ Agregar nuevo</a>
+            <a href="/buscar" class="btn btn-secondary ms-2">🔍 Buscar</a>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contacto in contactos %}
+                <tr>
+                    <td>{{ contacto.nombre }}</td>
+                    <td>{{ contacto.telefono }}</td>
+                    <td>{{ contacto.email }}</td>
+                    <td>
+                        <a href="/editar/{{ contacto.id }}" class="btn btn-sm btn-warning">✏️ Editar</a>
+                        <a href="/eliminar/{{ contacto.id }}" class="btn btn-sm btn-danger"
+                           onclick="return confirm('¿Eliminar este contacto?')">🗑️ Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-    <table border="1" cellpadding="10">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Teléfono</th>
-                <th>Email</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for contacto in contactos %}
-            <tr>
-                <td>{{ contacto.nombre }}</td>
-                <td>{{ contacto.telefono }}</td>
-                <td>{{ contacto.email }}</td>
-                <td>
-                    <a href="/editar/{{ contacto.id }}">✏️ Editar</a> |
-                    <a href="/eliminar/{{ contacto.id }}" onclick="return confirm('¿Eliminar este contacto?')">🗑️ Eliminar</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <!-- Bootstrap JS (opcional para cerrar alerts) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    © 2025 - Desarrollado por Andrés Rojas |
+    <a href="https://github.com/Arock900" class="text-white text-decoration-underline">GitHub</a>
+</footer>
+
+
 </html>

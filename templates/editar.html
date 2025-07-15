@@ -2,27 +2,54 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
-
 </head>
-<body>
-    <h1> Editar Contacto</h1>
+<body class="bg-light">
 
-    <form method="POST">
-        <label>Nombre:</label><br>
-        <input type="text" name="nombre" value="{{ contacto[1] }}" required><br><br>
+    <header class="bg-primary text-white text-center py-3 mb-4">
+        <h2>📇 Contactos Web</h2>
+        <nav>
+            <a href="/" class="text-white me-3">Inicio</a>
+            <a href="/agregar" class="text-white me-3">Agregar</a>
+            <a href="/buscar" class="text-white">Buscar</a>
+        </nav>
+    </header>
 
-        <label>Teléfono:</label><br>
-        <input type="text" name="telefono" value="{{ contacto[2] }}" required><br><br>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">✏️ Editar Contacto</h1>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" value="{{ contacto[3] }}" required><br><br>
+        <div class="card mx-auto" style="max-width: 500px;">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ contacto[1] }}" required>
+                    </div>
 
-        <button type="submit">Actualizar</button>
-    </form>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono:</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" value="{{ contacto[2] }}" required>
+                    </div>
 
-    <br>
-    <a href="/">🔙 Volver al inicio</a>
-</body>
-</html>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ contacto[3] }}" required>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">💾 Actualizar</button>
+                        <a href="/" class="btn btn-secondary">🔙 Volver al inicio</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        © 2025 - Desarrollado por Andrés Rojas |
+        <a href="https://github.com/Arock900" class="text-white text-decoration-underline">Gi
+
+            
